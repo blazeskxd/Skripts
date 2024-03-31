@@ -1,0 +1,41 @@
+# door keycard - iron block under the iron doors
+# mines keycard - coal block under the iron doors
+# admin keycard - bedrock under the iron doors (this keycard can be used also in the mines and on doors)
+
+# /keycards if you have op it will give you all the keycards
+command /keycards:
+  permission: op
+  trigger:
+    give player 1 paper of curse of vanishing named "&1&lDoor &a&lKeycard" with lore "&aCan be used on any door" and "&aUses: &2&lInfinite"
+    give player 1 paper of curse of vanishing named "&1&lMining &6&lKeycard" with lore "&aCan be used in the mines" and "&aUses: &2&lInfinite"
+    give player 1 paper of curse of vanishing named "&2&lAdmin &6&lKeycard" with lore "&aCan be used for anything…" and "&aUses: &2&lInfinite"
+
+# open doors with door keycard
+on rightclick on iron door:
+    if player's tool's display name is "&1&lDoor &a&lKeycard" or "&2&lAdmin &6&lKeycard":
+        if block below clicked block is iron block:
+            open the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.open master %player%"
+            wait 1 second
+            close the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.close master %player%"
+
+# open doors with mines keycard
+on rightclick on iron door:
+    if player's tool's display name is "&1&lMining &6&lKeycard" or "&2&lAdmin &6&lKeycard":
+        if block below clicked block is coal block:
+            open the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.open master %player%"
+            wait 1 second
+            close the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.close master %player%"
+
+# open doors with admin keycard
+on rightclick on iron door:
+    if player's tool's display name is "&2&lAdmin &6&lKeycard":
+        if block below clicked block is bedrock:
+            open the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.open master %player%"
+            wait 1 second
+            close the clicked block
+            execute console command "execute at %player% run playsound minecraft:block.iron_door.close master %player%"
