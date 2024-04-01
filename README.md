@@ -1,3 +1,5 @@
+If you have any questions/errors you can contact me on discord. Nickname: blazeskxd
+
 This is the list of all skripts and what they do:
 
 -ClearChat.sk = Used for clearing the chat ingame
