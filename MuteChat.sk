@@ -11,10 +11,9 @@ command /mutechat <text>:
             set {chatmute} to false
             broadcast "&cChat has been unmuted."
         if arg-1 is not set:
-            send "&cYou have to choose, &7Yes&c or &7No&c."
+            send "&cYou have to choose, &7on&c or &7off&c."
+
 on chat:
-    if {chatmute} = true:
+    if {chatmute} = true and player does not have permission "sk.mutechat":
         cancel event
         send title "&cSorry" with subtitle "&7You cannot type while chat is muted."
-    if {chatmute} = false:
-      #do nothing
