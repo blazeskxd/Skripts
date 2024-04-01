@@ -2,7 +2,7 @@
 # Code by BlazeSk
 #----------------------
 command /fly:
-    permission: skript.fly
+    permission: sk.fly
     trigger:
         if {flight.%player%} is not set:
             set {flight.%player%} to true

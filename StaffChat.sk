@@ -1,0 +1,16 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+
+options:
+    staff-chat-prefix: "&6[Staff]&r "
+  
+command /staffchat [<text>]:
+      aliases: /sc
+      permission: sk.staffchat
+      trigger:
+          if arg 1 is not set:
+              send "&cUsage: /staffchat <message>"
+          else:
+              broadcast "%{options.staff-chat-prefix}%sender%: %arg 1%"
+  

@@ -1,0 +1,25 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /lockdown <text>:
+    permission: sk.lockdown
+    trigger:
+        if arg 1 is "on":
+            loop all players:
+                if "{@lockdown}" is not set:
+                    if player has permission "sk.lockdown":
+                        send "&cYou have been kicked due to server lockdown."
+                        kick player due to "&cServer is currently in lockdown mode."
+            set {@lockdown} to true
+            broadcast "&cServer is now on lockdown!"
+        else if arg 1 is "off":
+            set {@lockdown} to false
+            broadcast "&aServer lockdown has been lifted!"
+        else:
+            send "&cUsage: /lockdown <on/off>"
+
+command /lockdownadd <text>:
+    permission: sk.lockdown
+    trigger:
+        add permission "%arg 1%" to player
+        send "&aPlayer %arg 1% has been granted lockdown permission."
