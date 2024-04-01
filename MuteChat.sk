@@ -1,0 +1,20 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /mutechat <text>:
+    permission: sk.mutechat
+    trigger:
+        if arg-1 = "on":
+            set {chatmute} to true
+            broadcast "&cChat has been muted."
+        if arg-1 = "off":
+            set {chatmute} to false
+            broadcast "&cChat has been unmuted."
+        if arg-1 is not set:
+            send "&cYou have to choose, &7Yes&c or &7No&c."
+on chat:
+    if {chatmute} = true:
+        cancel event
+        send title "&cSorry" with subtitle "&7You cannot type while chat is muted."
+    if {chatmute} = false:
+      #do nothing

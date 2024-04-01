@@ -1,0 +1,18 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /mute <offline player>:
+    permission: op
+    trigger:
+        set {mute::muted::%arg's uuid%} to 10
+        send "&cYou have been muted" to arg
+  
+on chat:
+    if {mute::muted::%player's uuid%} is set:
+        send "&cYou are muted!" to player
+        cancel event
+  
+command /unmute <offline player>:
+    permission: op
+    trigger:
+        delete {mute::muted::%arg's uuid%}

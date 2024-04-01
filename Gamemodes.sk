@@ -1,0 +1,31 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /gmc:
+    permission: skript.gm
+    permission message: &cYou don't have permission to do that!
+    trigger:
+        set gamemode of player to creative
+        message  "Your gamemode is now &6creative"
+  
+command /gms:
+    permission: skript.gm
+    permission message: &cYou don't have permission to do that!
+    trigger:
+        set gamemode of player to survival
+        message  "Your gamemode is now &6survival"
+  
+command /gmsp:
+    permission: skript.gm
+    permission message: &cYou don't have permission to do that!
+    trigger:
+        set gamemode of player to spectator
+        message  "Your gamemode is now &6spectator"
+  
+command /gma:
+    permission: skript.gm
+    permission message: &cYou don't have permission to do that!
+    trigger:
+        set gamemode of player to adventure
+        message  "Your gamemode is now &6adventure"
+  

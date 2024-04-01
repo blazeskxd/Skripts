@@ -1,0 +1,17 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /chatclear:
+    aliases: /chc
+    permission: sk.chc
+    trigger:
+        loop 100 times:
+            broadcast " "
+        broadcast "&6&l%player% &7cleared the chat"
+  
+command /achc:
+    permission: sk.achc
+    trigger:
+        loop 100 times:
+            broadcast " "
+        broadcast "&7The chat was cleared"

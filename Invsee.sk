@@ -1,0 +1,15 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command invsee <player>:
+    permission: sk.invsee
+    trigger:
+        if arg is online:
+            open inventory of arg to player 
+  
+  
+command ecsee <player>:
+    permission: sk.ecsee
+    trigger:
+        if arg is online:
+            open enderchest of arg to player 

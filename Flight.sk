@@ -1,0 +1,16 @@
+#----------------------
+# Code by BlazeSk
+#----------------------
+command /fly:
+    permission: skript.fly
+    trigger:
+        if {flight.%player%} is not set:
+            set {flight.%player%} to true
+        if {flight.%player%} is true:
+            set {flight.%player%} to false
+            allow flight for player
+            send "Flight &6enabled."
+        else:
+            set {flight.%player%} to true
+            disallow flight for player
+            send "Flight &6disabled."
