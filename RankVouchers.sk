@@ -1,5 +1,5 @@
 command /rankvouchers:
-  permission: op
+  permission: sk.vouchers
   trigger:
     give player diamond named "&9&lGuard &6rank" with lore "&aDrop to redeem &9&lGuard &6rank"
     give player redstone dust named "&c&lMafia &6rank" with lore "&aDrop to redeem &c&lMafia &6rank"
