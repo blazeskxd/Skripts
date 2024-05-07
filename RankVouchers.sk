@@ -1,0 +1,17 @@
+command /rankvouchers:
+  permission: op
+  trigger:
+    give player diamond named "&9&lGuard &6rank" with lore "&aDrop to redeem &9&lGuard &6rank"
+    give player redstone dust named "&c&lMafia &6rank" with lore "&aDrop to redeem &c&lMafia &6rank"
+
+on player drop:
+  if event-item is diamond named "&9&lGuard &6rank":
+    cancel event
+    wait 0.5 seconds
+    remove diamond named "&9&lGuard &6rank" from inventory of player
+    execute console command "lp user %player% parent set guard"
+  else if event-item is redstone dust named "&c&lMafia &6rank":
+    cancel event
+    wait 0.5 seconds
+    remove redstone dust named "&c&lMafia &6rank" from inventory of player
+    execute console command "lp user %player% parent set mafia"
