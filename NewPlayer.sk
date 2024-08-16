@@ -1,6 +1,7 @@
+# requires LUCKPERMS plugin
 on join:
-    if player has permission "escp.oldplayer":
+    if player has permission "server.oldplayer":
         stop
     else:
-        execute console command "lp user %player% permission set escp.oldplayer"
+        execute console command "lp user %player% permission set server.oldplayer"
         broadcast "&dNew player!"
