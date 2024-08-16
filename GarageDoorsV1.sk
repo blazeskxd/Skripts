@@ -1,0 +1,64 @@
+command /gd [<text>] [<text>]:
+    permission: gd.admin
+    trigger:
+        if arg-1 is not set:
+            send "&cPlease use /gd create <block-type>" to player
+        else if arg-1 is "create":
+            if arg-2 is "air":
+                send "&cPlease don't use air"
+            else if arg-2 is set:
+                send "&3Garage door created!" to player
+                add 1 to {c::%player%}
+                set {gd::%player%::%{c::%player%}%::x1} to {x1.%player%}
+                set {gd::%player%::%{c::%player%}%::y1} to {y1.%player%}
+                set {gd::%player%::%{c::%player%}%::z1} to {z1.%player%}
+                set {gd::%player%::%{c::%player%}%::x2} to {x2.%player%}
+                set {gd::%player%::%{c::%player%}%::y2} to {y2.%player%}
+                set {gd::%player%::%{c::%player%}%::z2} to {z2.%player%}
+                set {gd::%player%::%{c::%player%}%::bt} to arg-2
+                give player paper named "&3Garage door remote &b%{c::%player%}%"
+                set {_item} to paper named "&3Garage door remote &b%{c::%player%}%"
+                remove {_item} from player's inventory
+                enchant {_item} with "unbreaking %{c::%player%}%" parsed as enchantment type
+                give {_item} to player
+            else:
+                send "&cYou need to set a block in arg-2!"
+        else if arg-1 is "reset":
+            set {c::%player%} to 0
+            send "&3Garage door skript was reseted"
+
+on rightclick with paper:
+    if event-item's display name contains "&3Garage door remote":
+        set {_gd} to unbreaking level of player's tool
+        set {_x1} to {gd::%player%::%{_gd}%::x1}
+        set {_y1} to {gd::%player%::%{_gd}%::y1}
+        set {_z1} to {gd::%player%::%{_gd}%::z1}
+        set {_x2} to {gd::%player%::%{_gd}%::x2}
+        set {_y2} to {gd::%player%::%{_gd}%::y2}
+        set {_z2} to {gd::%player%::%{_gd}%::z2}
+        set {_bt} to {gd::%player%::%{_gd}%::bt}
+        execute console command "fill %{_x1}% %{_y1}% %{_z1}% %{_x2}% %{_y2}% %{_z2}% air"
+        wait 4 seconds
+        execute console command "fill %{_x1}% %{_y1}% %{_z1}% %{_x2}% %{_y2}% %{_z2}% %{_bt}%"
+
+on load:
+    loop all players:
+        if loop-player has permission "gd.admin":
+            send "&3GarageDoor Skript Reloaded!" to loop-player
+            send "&3Version &b1" to loop-player
+            send "&3Needs Blaze's &bWorldEditSkriptV1.1 &3to work!" to loop-player
+            send "&3Skript by &b&lBlazeSk" to loop-player
+            send "&3Command: &b/gd create <block-type>" to loop-player
+            send "&3Command: &b/gd reset" to loop-player
+            send "&3To create a GD first make a selection with &b//wand" to loop-player
+
+command /gdhelp:
+    permission: gd.admin
+    trigger:
+        send "&3GarageDoor Skript Reloaded!" to player
+        send "&3Version &b1" to player
+        send "&3Needs Blaze's &bWorldEditSkriptV1.1 &3to work!" to player
+        send "&3Skript by &b&lBlazeSk" to player
+        send "&3Command: &b/gd create <block-type>" to player
+        send "&3Command: &b/gd reset" to player
+        send "&3To create a GD first make a selection with &b//wand" to player

@@ -1,0 +1,152 @@
+#-------------------------
+# 	   By: BlazeSk
+#-------------------------
+
+on right click with wooden axe:
+	if name of player's held item is "&4&lWorldedit &c&lWand":
+		if player has permission "we.*" or "we.select":
+			set {x1.%player%} to rounded down x-position of event-block
+			set {y1.%player%} to rounded down y-position of event-block
+			set {z1.%player%} to rounded down z-position of event-block
+			send actionbar "&bPos 2 set! &3(X: %{x1.%player%}%, Y: %{y1.%player%}% Z: %{z1.%player%}%)" to player
+		else:
+			send actionbar "&cYou don't have permission to use worldedit" to player
+
+on break:
+	if name of player's held item is "&4&lWorldedit &c&lWand":
+		if player has permission "we.*" or "we.select":
+			cancel event
+			set {x2.%player%} to rounded down x-position of event-block
+			set {y2.%player%} to rounded down y-position of event-block
+			set {z2.%player%} to rounded down z-position of event-block
+			send actionbar "&bPos 1 set! &3(X: %{x2.%player%}%, Y: %{y2.%player%}% Z: %{z2.%player%}%)" to player
+		else:
+			send actionbar "You don't have permission to use worldedit" to player
+
+Command //wand:
+	trigger:
+		if player has permission "we.*" or "we.wand":
+			give 1 wooden axe named "&4&lWorldedit &c&lWand" with lore "&1&kSA &3Skript made by BlazeSk &1&kSA" to player
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+
+Command //del:
+	trigger:
+		if player has permission "we.*" or "we.del":
+			set {_u} to unix timestamp of now
+			execute console command "fill %{x1.%player%}% %{y1.%player%}% %{z1.%player%}% %{x2.%player%}% %{y2.%player%}% %{z2.%player%}% air"
+			set {_time} to (unix timestamp of now - {_u}) * 1000
+			send actionbar "&3Operation completed in &b%{_time}%ms."
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+			
+Command //set [<text>]:
+	trigger:
+		if player has permission "we.*" or "we.set":
+			arg-1 is set:
+				delete {_sections::*}
+				arg-1 contains ",":
+					set {_sections::*} to arg-1 split at ","
+				set {_u} to unix timestamp of now
+				{y2.%player%} > {y1.%player%}:
+					set {_loop} to {y2.%player%} - {y1.%player%} + 1
+					set {_add} to false
+				else:
+					set {_loop} to {y1.%player%} - {y2.%player%} + 1 
+					set {_add} to true
+				set {_time1} to now
+				set {_c} to {y2.%player%}
+				{_loop} > 50:
+					loop {_loop} / 2 times:
+						execute console command "fill %{x1.%player%}% %{_c}% %{z1.%player%}% %{x2.%player%}% %{_c} + 1% %{z2.%player%}% %arg-1%"
+						{_add} is false:
+							remove 2 from {_c}
+						else:
+							add 2 to {_c}
+						wait 1 tick
+					{_c} > 0:
+						{_add} is false:
+							remove 1 from {_c}
+						else:
+							add 1 to {_c}
+						execute console command "fill %{x1.%player%}% %{_c}% %{z1.%player%}% %{x2.%player%}% %{_c} + 1% %{z2.%player%}% %arg-1%"
+				else:
+					loop {_loop} times:
+						execute console command "fill %{x1.%player%}% %{_c}% %{z1.%player%}% %{x2.%player%}% %{_c}% %{z2.%player%}% %arg-1%"
+						{_add} is false:
+							remove 1 from {_c}
+						else:
+							add 1 to {_c}
+				set {_time} to (unix timestamp of now - {_u}) * 1000
+				send actionbar "&3Operation completed in &b%{_time}%ms."
+			else:
+				send actionbar "&cCorrect usage: &3//set Block_Name"
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+		
+Command //walls [<text>]:
+	trigger:
+		if player has permission "we.*" or "we.walls":
+			arg-1 is set:
+				set {_u} to unix timestamp of now
+				execute console command "fill %{x1.%player%}% %{y1.%player%}% %{z1.%player%}% %{x2.%player%}% %{y2.%player%}% %{z1.%player%}% %arg-1%"
+				execute console command "fill %{x2.%player%}% %{y2.%player%}% %{z1.%player%}% %{x2.%player%}% %{y1.%player%}% %{z2.%player%}% %arg-1%"
+				execute console command "fill %{x2.%player%}% %{y1.%player%}% %{z2.%player%}% %{x1.%player%}% %{y2.%player%}% %{z2.%player%}% %arg-1%"
+				execute console command "fill %{x1.%player%}% %{y2.%player%}% %{z2.%player%}% %{x1.%player%}% %{y1.%player%}% %{z1.%player%}% %arg-1%"
+				set {_time} to (unix timestamp of now - {_u}) * 1000
+				send actionbar "&3Operation completed in &b%{_time}%ms."
+			else:
+				send actionbar "&cCorrect usage: &b//walls Block_Name"
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+			
+Command //paste:
+	trigger:
+		if player has permission "we.*" or "we.paste":
+			set {_u} to unix timestamp of now
+			execute console command "clone %{x1.%player%}% %{y1.%player%}% %{z1.%player%}% %{x2.%player%}% %{y2.%player%}% %{z2.%player%}% %rounded down x-location of player% %rounded down y-location of player% %rounded down z-location of player% masked"
+			set {_time} to (unix timestamp of now - {_u}) * 1000
+			send actionbar "&3Operation completed in &b%{_time}%ms."
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+Command //copy:
+	trigger:
+		if player has permission "we.*" or "we.copy":
+			set {_u} to unix timestamp of now
+			execute console command "clone %{x1.%player%}% %{y1.%player%}% %{z1.%player%}% %{x2.%player%}% %{y2.%player%}% %{z2.%player%}% air"
+			set {_time} to (unix timestamp of now - {_u}) * 1000
+			send actionbar "&3Operation completed in &b%{_time}%ms."
+		else:
+			send actionbar "&cYou don't have permission to run this command!"
+
+command //help:
+	trigger:
+		send "&1---> &bInformation &1<---"
+		send "&3 Skript by &b&lBlazeSk"
+		send "&3 Version: &b1.1"
+		send "&3 Creation date: &b13/8/2024"
+		send ""
+		send "&1---> &bPermissions &1<---"
+		send "&b we.* &3= all perms"
+		send "&b we.select &3= selection permissions"
+		send "&b we.wand &3= //wand permissions"
+		send "&b we.set &3= //set permissions"
+		send "&b we.walls &3= //walls permissions"
+		send "&b we.paste &3= //paste permissions"
+		send "&b we.copy &3= //copy permissions"
+		send "&b we.del &3= //del permissions"
+		send ""
+		send "&1---> &bCommand List &1<---"
+		send "&b //wand &3Gives you the worldedit wand"
+		send "&b //set <block> &3Replaces the selected blocks"
+		send "&b //walls <block> &3Makes walls around your selection"
+		send "&b //paste &3Pastes the copied blocks"
+		send "&b //copy &3Copies the selected blocks"
+		send "&b //del &3Removes the selected blocks"
+
+on load:
+	loop all players:
+		if loop-player has permission "we.*":
+			send "&3WorldEdit Skript Reloaded!" to loop-player
+			send "&3Version &b1.1" to loop-player
+			send "&3Skript by &b&lBlazeSk" to loop-player

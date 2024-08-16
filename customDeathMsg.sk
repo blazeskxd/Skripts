@@ -1,0 +1,20 @@
+on death:
+    set {dethM} to random integer between 1 and 4
+    if attacker is a player:
+        if {dethM} is 1:
+            set the death message to "%victim% died from emotional damage from %attacker%"
+        else if {dethM} is 2:
+            set the death message to "%victim% suffered minor injury from %attacker%"
+        else if {dethM} is 3:
+            set the death message to "%victim% got a heart attack caused by %attacker%"
+        else if {dethM} is 4:
+            set the death message to "%victim% lost a fight against %attacker%"
+    else:
+        if {dethM} is 1:
+            set the death message to "%victim% got emotional damage"
+        else if {dethM} is 2:
+            set the death message to "%victim% got a heart attack" 
+        else if {dethM} is 3:
+            set the death message to "%victim% suffered minor injury"
+        else if {dethM} is 4:
+            set the death message to "%victim% felt suicidal" 

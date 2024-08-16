@@ -1,0 +1,56 @@
+# shirt cleaner
+on rightclick on barrel:
+    if block under clicked block is cauldron:
+        cancel event
+        give player leather chestplate named "&cDirty Shirt"
+
+on rightclick on cauldron:
+    if player's held item's display name is "&cDirty Shirt":
+        cancel event
+        remove event-item from player's inventory
+        give player leather chestplate named "&fClean Shirt"
+
+
+# log breaker
+on break of oak log:
+    if player's tool's display name is "&6&lLog Chopper":
+        set event-block to air
+        give player oak log named "&6&lChopped Log"
+        wait 10 seconds
+        set event-block to oak log
+
+# baker
+on rightclick on furnace:
+    if player's tool's display name is "&6&lRaw stew":
+        cancel event
+        remove event-item from player's inventory
+        send actionbar "&cCooking... &7Wait 5 seconds" to player
+        wait 5 seconds
+        set name of event-item to "&6&lCooked stew"
+        give player event-item
+        
+on rightclick on barrel:
+    if block under clicked block is furnace:
+        cancel event
+        give player rabbit stew named "&6&lRaw stew"
+
+# brooming
+
+on rightclick on brown carpet:
+    if player's tool's display name is "&6&lJanitor's Broom":
+        give player brown dye named "&4&lShit from the floor"
+        set event-block to air
+        wait 10 seconds
+        set event-block to brown carpet
+
+# cmds
+command /broom:
+    permission: jobs.admin
+    trigger:
+        give player brush named "&6&lJanitor's Broom"
+
+on load:
+	loop all players:
+		if loop-player has permission "jobs.admin":
+			send "&3Jobs Skript Reloaded!" to loop-player
+			send "&3Version &b1" to loop-player

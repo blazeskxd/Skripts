@@ -1,0 +1,6 @@
+on join:
+    if player has permission "escp.oldplayer":
+        stop
+    else:
+        execute console command "lp user %player% permission set escp.oldplayer"
+        broadcast "&dNew player!"

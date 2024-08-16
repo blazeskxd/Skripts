@@ -1,0 +1,30 @@
+command /plugins:
+    trigger:
+        send "&cNone of your buisness!"
+command /bukkit:plugins:
+    trigger:
+        send "&cNone of your buisness!"
+command /pl:
+    trigger:
+        send "&cNone of your buisness!"
+command /bukkit:pl:
+    trigger:
+        send "&cNone of your buisness!"
+command /bukkit:about:
+    trigger:
+        send "&cNone of your buisness!"
+command /bukkit:ver:
+    trigger:
+        send "&cNone of your buisness!"
+command /bukkit:version:
+    trigger:
+        send "&cNone of your buisness!"
+command /version:
+    trigger:
+        send "&cNone of your buisness!"
+command /ver:
+    trigger:
+        send "&cNone of your buisness!"
+command /about:
+    trigger:
+        send "&cNone of your buisness!"

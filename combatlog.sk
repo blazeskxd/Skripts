@@ -1,0 +1,18 @@
+on damage:
+    if attacker is a player:
+        if victim is a player:
+            set {combat::%attacker%} to 10
+            set {combat::%victim%} to 10
+
+every 1 second:
+    loop all players:
+        if {combat::%loop-player%} > 0:
+            send actionbar "&cYou are in combat &7%{combat::%loop-player%}%s" to loop-player
+            wait 1 second
+            set {combat::%loop-player%} to {combat::%loop-player%} - 1
+        else if {combat::%loop-player%} is 0:
+            send actionbar "&aYou are no longer in combat" to loop-player
+
+on quit:
+    if {combat::%player%} > 0:
+        kill the player
