@@ -1,3 +1,7 @@
+#----------------------
+# Skript by BlazeSk
+#----------------------
+
 # shirt cleaner
 on rightclick on barrel:
     if block under clicked block is cauldron:
