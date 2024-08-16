@@ -1,3 +1,6 @@
+#----------------------
+# Skript by BlazeSk
+#----------------------
 command /gd [<text>] [<text>]:
     permission: gd.admin
     trigger:
