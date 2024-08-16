@@ -1,3 +1,7 @@
+#----------------------
+# Skript by BlazeSk
+#----------------------
+
 command /plugins:
     trigger:
         send "&cNone of your buisness!"
