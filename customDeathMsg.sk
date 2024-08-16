@@ -1,3 +1,7 @@
+#----------------------
+# Skript by BlazeSk
+#----------------------
+
 on death:
     set {dethM} to random integer between 1 and 4
     if attacker is a player:
