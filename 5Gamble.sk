@@ -1,0 +1,13 @@
+command /doubleornothing <number>:
+    permission: sk.eco.gamble
+    trigger:
+        if {balance::%player%} >= arg-1:
+            set {gamble} to random integer between 1 and 2
+            if {gamble} is 1:
+                send "&3You lost"
+                set {balance::%player%} to {balance::%player%} - arg-1
+            else if {gamble} is 2:
+                send "&3You win"
+                add arg-1 to {balance::%player%}
+        else:
+            send "&cInsufficient funds"

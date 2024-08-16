@@ -1,0 +1,30 @@
+command /pay <player> <number>:
+    permission: sk.eco.pay
+    trigger:
+        if arg-2 <= {balance::%player%}:
+            send "&3You have sent &b%arg-2%%{prefix}% &3to &b%arg-1%"
+            set {balance::%player%} to {balance::%player%} - arg-2
+            set {balance::%arg-1%} to {balance::%arg-1%} + arg-2
+        else:
+            send "&cInsufficient funds"
+
+command /setbal <player> <number>:
+    permission: sk.eco.setbal
+    trigger:
+        set {balance::%arg-1%} to arg-2
+        send "&b%arg-1%'s &3balance has been set to &b%arg-2%%{prefix}%"
+        send "&3Your balance has been set to &b%arg-2%%{prefix}%" to arg-1
+command /balance [<player>]:
+    aliases: bal
+    permission: sk.eco.balance
+    trigger:
+        if arg-1 is not set:
+            send "&3Your balance is &b%{balance::%player%}%%{prefix}%"
+        else:
+            send "&b%arg-1%'s &3balance is &b%{balance::%arg-1%}%%{prefix}%"
+command /setmoneytype <text>:
+    aliases: smt
+    permission: sk.eco.smt
+    trigger:
+        set {prefix} to arg-1
+        send "&3The prefix has been set to &b%arg-1%"

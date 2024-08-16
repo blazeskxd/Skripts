@@ -1,0 +1,26 @@
+on load:
+    loop all players:
+        if loop-player has permission "sk.*":
+            send "&3Economy Skript Reloaded!" to loop-player
+            send "&3Version &b1" to loop-player
+            send "&3Skript by &b&lBlazeSk" to loop-player
+            send "&3Command &b/ehelp" to loop-player
+
+command /ehelp:
+    trigger:
+        send "&3Economy Skript"
+        send "&3Version &b1"
+        send "&3Skript by &b&lBlazeSk"
+        send "&3Command &b/ehelp"
+        send " "
+        send "&b-- ADMIN COMMANDS --"
+        send "/setbal <player> <ammount>"
+        send "/setmoneytype <$/€/...>"
+        send "/setbounty <player> <number>"
+        send " "
+        send "&b-- PLAYER COMMANDS --"
+        send "/pay <player> <amount>"
+        send "/balance <player>"
+        send "/addbounty <player> <number>"
+        send "/bounty <player>"
+        send "/withdraw <number>"

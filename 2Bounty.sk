@@ -1,0 +1,44 @@
+on death:
+    if {balance::%victim%} < 100:
+        add 1 to {bounty::%attacker%}
+    else if {balance::%victim%} < 1000:
+        add 2 to {bounty::%attacker%}
+    else if {balance::%victim%} < 10000:
+        add 5 to {bounty::%attacker%}
+    else if {balance::%victim%} > 10000:
+        add 10 to {bounty::%attacker%}
+# 1 bounty is 10$
+on death:
+    set {redeem} to {bounty::%victim%}
+    if {redeem} is 0:
+        add 5 to {bounty::%attacker%}
+        send "&3You have killed a player without any bounty and you have recieved &b5 bounty" to attacker
+    else:
+        set {redeem} to {redeem} * 10
+        add {redeem} to {balance::%attacker%}
+        send "&3You have redeemed &b%{redeem}%%{prefix}%&3 from %victim%'s bounty" to attacker
+
+command /bounty [<player>]:
+    trigger:
+        if arg-1 is not set:
+            set {redeem} to {bounty::%player%} * 10
+            send "&3Your current bounty is %{bounty::%player%}% or %{redeem}%%{prefix}%"    
+        else:
+            set {redeem} to {bounty::%arg-1%} * 10
+            send "&3%arg-1%'s current bounty is &b%{bounty::%arg-1%}% &3or &b%{redeem}%%{prefix}%"
+
+command /setbounty <player> <number>:
+    permission: sk.eco.setbounty
+    trigger:
+        set {bounty::%arg-1%} to arg-2
+        send "&3%arg-1%'s bounty has been set to &b%{bounty::%arg-1%}%" to player
+
+command /addbounty <player> <number>:
+    permission: sk.eco.addbounty
+    trigger:
+        if arg-2 > {balance::%player%}:
+            send "&cInsufficient funds"
+        else:
+            set {bounty::%arg-1%} to {bounty::%arg-1%} + arg-2
+            set {balance::%player%} to {balance::%player%} - arg-2
+            send "&3You have added &b%arg-2% to &b%arg-1%'s &3bounty"

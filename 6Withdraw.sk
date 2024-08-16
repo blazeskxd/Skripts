@@ -1,0 +1,23 @@
+command /withdraw [<number>]:
+    permission: sk.eco.withdraw
+    trigger:
+        if arg-1 is not set:
+            send "You need to specify a number!" to player
+        else:
+            if {balance::%player%} >= arg-1:
+                set {balance::%player%} to {balance::%player%} - arg-1
+                give player paper named "&3Bank note &b%arg-1%%{prefix}%" with lore "&3Rightclick to redeem" and "&3/withdraw"
+                set {_item} to paper named "&3Bank note &b%arg-1%%{prefix}%" with lore "&3Rightclick to redeem" and "&3/withdraw"
+                remove {_item} from player's inventory
+                enchant {_item} with "mending %arg-1%" parsed as enchantment type
+                give {_item} to player
+                send "&3You have successfully taken &b%arg-1%%{prefix}% &3out of your account" to player
+            else:
+                send "&cInsufficient funds" to player
+
+on rightclick:
+    if player's held item's display name contains "&3Bank note":
+        set {deposit} to mending level of player's tool
+        add {deposit} to {balance::%player%}
+        send "&3You have successfully added &b%{deposit}%%{prefix}% &3to your account" to player
+        remove event-item from player's inventory

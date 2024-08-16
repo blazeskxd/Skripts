@@ -1,0 +1,10 @@
+on join:
+    add 50 to {balance::%player%}
+    set {Hsalary::%player%} to 60
+
+every 1 minute:
+    loop all players:
+        remove 1 from {Hsalary::%loop-player%}
+        if {Hsalary::%loop-player%} is 0:
+            set {Hsalary::%loop-player%} to 60
+            add 100 to {balance::%loop-player%}
