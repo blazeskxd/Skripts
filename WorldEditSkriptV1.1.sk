@@ -1,6 +1,6 @@
-#-------------------------
-# 	   By: BlazeSk
-#-------------------------
+#----------------------
+# Skript by BlazeSk
+#----------------------
 
 on right click with wooden axe:
 	if name of player's held item is "&4&lWorldedit &c&lWand":
